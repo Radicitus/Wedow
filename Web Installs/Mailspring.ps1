@@ -1,14 +1,20 @@
-param($originPath="C:\Users\CamCam\Documents\Code\Personal\Wedow\",$outPath="C:\Users\CamCam\Desktop")
+param($originPath,$outPath,$isInstaller)
 
 #Mailspring
 $Uri = 'https://updates.getmailspring.com/download?platform=win32'
-$installerName = 'MailspringSetup.exe'
+$appName = 'Mailspring'
+$installerName = $appName + 'Setup.exe'
 
 $installerPath = $outPath + '\' + $installerName
 #
 Powershell.exe -executionpolicy remotesigned -File ($originPath + '\Utilities\asyncDownload.ps1') $Uri $installerPath
-#Start-Process -FilePath $installerPath
-Start-Sleep -Seconds 180
-Write-Host '  Mailspring has been installed!' -ForegroundColor DarkCyan
+If ($isInstaller) {
+    Write-Host 'Installer = '$isInstaller
+    Start-Process -FilePath $installerPath
+    Start-Sleep -Seconds 180
+    Write-Host '  '$appName' has been installed!' -ForegroundColor DarkCyan
+} Else {
+    Write-Host '  '$appName' has been downloaded!' -ForegroundColor DarkCyan
+}
 
 Write-Host
