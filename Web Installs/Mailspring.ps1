@@ -8,13 +8,12 @@ $installerName = $appName + 'Setup.exe'
 $installerPath = $outPath + '\' + $installerName
 #
 Powershell.exe -executionpolicy remotesigned -File ($originPath + '\Utilities\asyncDownload.ps1') $Uri $installerPath
-If ($isInstaller) {
-    Write-Host 'Installer = '$isInstaller
-    Start-Process -FilePath $installerPath
-    Start-Sleep -Seconds 180
-    Write-Host '  '$appName' has been installed!' -ForegroundColor DarkCyan
+If ($isInstaller -eq $true) {
+    Write-Host '  Starting'$appName' installation...' -ForegroundColor DarkCyan
+    Start-Process -FilePath $installerPath -Wait
+    Write-Host '   '$appName' has been installed!' -ForegroundColor Green
 } Else {
-    Write-Host '  '$appName' has been downloaded!' -ForegroundColor DarkCyan
+    Write-Host '  '$appName' has been downloaded!' -ForegroundColor Green
 }
 
 Write-Host

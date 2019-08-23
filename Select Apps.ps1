@@ -1,6 +1,6 @@
 #Requires -RunAsAdministrator
 param($originPath=$PSScriptRoot,$outPath=('C:\Users\' + $env:Username + '\Desktop\Installers'))
-New-Item -Path $outPath -ItemType 'directory' -Force
+New-Item -Path $outPath -ItemType 'directory' -Force | Out-Null
 $isInstaller = $false
 
 $prompt = New-Object -ComObject wscript.shell
@@ -8,7 +8,7 @@ $selection = $prompt.popup(('Would you like to download AND install?'), 5, ($env
 If ($selection -eq 6 -OR $selection -eq -1) {$isInstaller = $true}
 $webInstallPath = $originPath + '\Web Installs'
 
-Write-Host 'Beginning web installs...' -ForegroundColor Cyan
+Write-Host 'Beginning web downloads...' -ForegroundColor Cyan
 
 Get-ChildItem $webInstallPath | ForEach-Object {
     Get-ChildItem -Path ('C:\Users\' + $env:Username + '\Desktop\*') -Include '*.lnk' | Where-Object { $_.Name.Contains($_.BaseName) } | Remove-Item
@@ -20,4 +20,4 @@ Get-ChildItem $webInstallPath | ForEach-Object {
     }
 }
 
-Write-Host 'Installations complete!' -ForegroundColor Cyan
+Write-Host 'Operations complete!' -ForegroundColor Cyan
