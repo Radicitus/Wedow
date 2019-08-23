@@ -1,5 +1,10 @@
 #Requires -RunAsAdministrator
-param($originPath=$PSScriptRoot,$outPath=('C:\Users\' + $env:Username + '\Desktop\Installers'))
+param($originPath=$PSScriptRoot,$outPath=('C:\Users\' + $env:Username + '\Desktop\Installers'),$format=$false)
+
+If ($format -eq $true) {
+    Powershell.exe -executionpolicy remotesigned -File ($originPath + '\Utilities\installerFormatter.ps1')
+}
+
 New-Item -Path $outPath -ItemType 'directory' -Force | Out-Null
 $isInstaller = $false
 
