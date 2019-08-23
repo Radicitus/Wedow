@@ -1,8 +1,8 @@
 param($originPath,$outPath,$isInstaller)
 
-#Mailspring
-$Uri = 'https://updates.getmailspring.com/download?platform=win32'
 $appName = 'Mailspring'
+#
+$Uri = 'https://updates.getmailspring.com/download?platform=win32'
 $installerName = $appName + 'Setup.exe'
 
 $installerPath = $outPath + '\' + $installerName
